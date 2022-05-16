@@ -13,8 +13,8 @@
 #
 class Recipe < ApplicationRecord
   validates :name, presence: true
-  validates :preparation_time, numericality: { in: 1..2880 }
-  validates :cooking_time, numericality: { in: 1..2880 }
+  validates :preparation_time, numericality: { in: 1..1440 }
+  validates :cooking_time, numericality: { in: 1..1440 }
   validates :description, length: { in: 1..200 }
   validates :public, presence: true
 end

@@ -66,7 +66,7 @@ RSpec.describe Recipe, type: :model do
     end
 
     it 'should be invalid with a preparation time over 2880' do
-      recipe.preparation_time = 2881
+      recipe.preparation_time = 1441
 
       expect(recipe).to_not be_valid
     end
@@ -84,7 +84,7 @@ RSpec.describe Recipe, type: :model do
     end
 
     it 'should be invalid with a cooking time over 2880' do
-      recipe.cooking_time = 2881
+      recipe.cooking_time = 1441
 
       expect(recipe).to_not be_valid
     end

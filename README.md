@@ -37,6 +37,7 @@ Install all the dependencies.
 
 ```
 bundle install
+npm install
 ```
 
 Create and migrate the database

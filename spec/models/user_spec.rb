@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'name length should not be greate than 100 characters' do
-      user.name = puts 'John' * 26
+      user.name = 'John' * 26
       expect(user).to_not be_valid
     end
   end

@@ -30,14 +30,30 @@ RSpec.describe Recipe, type: :model do
       expect(@recipe).to_not be_valid
     end
 
-    it 'should be invalid without a preparation time' do
+    it 'should be invalid with a preparation time under 1 and over 2880' do
       @recipe.preparation_time = nil
+
+      expect(@recipe).to_not be_valid
+
+      @recipe.preparation_time = 0
+
+      expect(@recipe).to_not be_valid
+
+      @recipe.preparation_time = 2881
 
       expect(@recipe).to_not be_valid
     end
 
-    it 'should be invalid without a cooking time' do
+    it 'should be invalid with a cooking time under 1 and over 2880' do
       @recipe.cooking_time = nil
+
+      expect(@recipe).to_not be_valid
+
+      @recipe.cooking_time = 0
+
+      expect(@recipe).to_not be_valid
+
+      @recipe.cooking_time = 2881
 
       expect(@recipe).to_not be_valid
     end

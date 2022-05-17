@@ -25,7 +25,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.create(:user, name: 'Tekle') }
+  let(:user) do
+    FactoryBot.create(:user,
+                      name: 'Adam',
+                      email: 'adam@mail.com',
+                      password: 'password',
+                      password_confirmation: 'password')
+  end
 
   describe 'validate data: ' do
     it 'name should be present' do

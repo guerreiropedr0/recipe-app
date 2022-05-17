@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Inventory, type: :model do
   describe 'Inventory model' do
-    inventory_queries { Inventory.new(name: 'Edward', user_id: 1) }
+    let(:inventory) { FactoryBot.create(:inventory, name: 'Edward', user_id: 1) }
   end
 
   before { inventory_queries.save }

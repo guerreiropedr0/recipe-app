@@ -10,16 +10,30 @@
 #  public           :boolean
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  user_id          :bigint           not null
+#
+# Indexes
+#
+#  index_recipes_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
-  context 'validation' do
-    let(:recipe) do
-      FactoryBot.create(:recipe, name: 'French macaroons', preparation_time: '20', cooking_time: '15',
-                                 description: 'Delicious snack', public: true)
-    end
+  let(:user) do
+    FactoryBot.create(:user, name: 'Pedro Guerreiro')
+  end
 
+  let(:recipe) do
+    FactoryBot.create(:recipe, name: 'French macaroons', preparation_time: '20', cooking_time: '15',
+                               description: 'Delicious snack', public: true,
+                               user_id: user.id)
+  end
+
+  context 'validation' do
     it 'should be valid with valid attributes' do
       expect(recipe).to be_valid
     end
@@ -48,11 +62,6 @@ RSpec.describe Recipe, type: :model do
   end
 
   context 'preparation_time and cooking_time columns' do
-    let(:recipe) do
-      FactoryBot.create(:recipe, name: 'French macaroons', preparation_time: '20', cooking_time: '15',
-                                 description: 'Delicious snack', public: true)
-    end
-
     it 'should be invalid without a preparation time' do
       recipe.preparation_time = nil
 

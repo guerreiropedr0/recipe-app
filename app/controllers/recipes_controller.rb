@@ -9,5 +9,9 @@ class RecipesController < ApplicationController
 
   def show; end
 
+  def new; end
+
+  def create; end
+
   def public_recipes; end
 end

@@ -1,6 +1,7 @@
 <div class="container mt-3">
   <h1 class="text-center mb-3">Your Recipes</h1>
   <% if current_user %>
+    <%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary" %> <!-- No layout design, it will look better on navbar -->
     <% if @recipes.empty? %>
       <div>
         <h3 class="text-center">No recipes yet.</h3>

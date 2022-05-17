@@ -1,1 +1,14 @@
-<h1>This will be all the recipes for a given user</h1>
+<div class="container mt-3">
+  <h1 class="text-center mb-3">Your Recipes</h1>
+  <% @recipes.each do |recipe| %>
+    <div class="d-flex justify-content-center align-items-baseline gap-5 bg-light border w-75 m-auto p-3">
+      <div class="d-flex flex-column align-items-center flex-grow-1">
+        <h2 class="text-center"><%= recipe.name %></h2>
+        <button>REMOVE</button>
+      </div>
+      <div class="flex-grow-1" style="max-height: 200px; overflow: auto">
+        <p><%= recipe.description %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,39 +1,79 @@
 require 'rails_helper'
 
-RSpec.describe "Foods", type: :request do
-  describe "GET /index" do
-    it "returns http success" do
-      get "/foods/index"
+RSpec.describe 'Foods', type: :request do
+  # let(:user) do
+  #   FactoryBot.create(:user,
+  #                     name: 'Adam',
+  #                     email: 'adam@mail.com',
+  #                     password: 'password',
+  #                     password_confirmation: 'password')
+  # end
+
+  # before(:example) do
+  #   user.confirm
+  #   sign_in user
+  # end
+
+  Food.delete_all
+  User.delete_all
+  user = User.new(name: 'Adam',
+                  email: 'adam@mail.com',
+                  password: 'password',
+                  password_confirmation: 'password')
+  food = Food.new(name: 'Apple',
+                  measurement_unit: 'grams',
+                  price: 1.15,
+                  user: user)
+  before(:all) do
+    # User.delete_all
+    user.save
+    food.save
+    user.confirm
+    sign_in user
+  end
+
+  describe 'GET /foods' do
+    it 'returns http success' do
+      get '/foods'
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders 'index' template" do
+      get '/foods'
+      expect(response).to render_template('index')
+    end
+
+    it 'page contains text' do
+      get '/foods'
+      expect(response.body).to include('There are no registered foods, yet')
+    end
+  end
+
+  describe 'GET /foods/{id}' do
+    it 'returns http success' do
+      get "/foods/#{food.id}"
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /show" do
-    it "returns http success" do
-      get "/foods/show"
+  describe 'GET /new' do
+    it 'returns http success' do
+      get '/foods/new'
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /new" do
-    it "returns http success" do
-      get "/foods/new"
-      expect(response).to have_http_status(:success)
+  describe 'POST /foods' do
+    it 'returns http success' do
+      post '/foods', params: { food: { name: food.name, measurement_unit: food.measurement_unit, price: food.price } }
+      expect(response).to have_http_status(302)
     end
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/foods/create"
-      expect(response).to have_http_status(:success)
+  describe 'DELETE /foods/{id}' do
+    it 'returns http success' do
+      delete food_path(food)
+      expect(response).to have_http_status(302)
     end
   end
-
-  describe "GET /destroy" do
-    it "returns http success" do
-      get "/foods/destroy"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end

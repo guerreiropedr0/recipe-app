@@ -1,19 +1,29 @@
+# == Schema Information
+#
+# Table name: inventories
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe Inventory, type: :model do
   describe 'Inventory model' do
-    let(:inventory) { FactoryBot.create(:inventory, name: 'Edward', user_id: 1) }
+    let(:user) { FactoryBot.create(:user, name: 'John') }
+    let(:inventory) { FactoryBot.create(:inventory, name: 'Edward', user_id: user.id) }
   end
 
-  before { inventory_queries.save }
+  before { inventory.save }
 
   it 'should check for valid attributes' do
-    expect(inventory_queries).to be_valid
+    expect(inventory).to be_valid
   end
 
   it 'should be invalid without name attribute' do
-    inventory_queries.name = ''
+    inventory.name = ''
 
-    expect(inventory_queries).to_not be_valid
+    expect(inventory).to_not be_valid
   end
 end

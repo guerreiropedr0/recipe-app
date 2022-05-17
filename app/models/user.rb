@@ -8,5 +8,7 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
+  has_many :recipes
+
   validates :name, length: { maximum: 100 }, presence: true
 end

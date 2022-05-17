@@ -1,4 +1,7 @@
 <main class="container">
   <h1>Landing Page - Home#index</h1>
+  <% if current_user.present? %>
+   <p>Login as: <%= current_user.email %></p>
+  <% end %>
   <p>Find me in app/views/home/index.html.erb</p>
 </main>

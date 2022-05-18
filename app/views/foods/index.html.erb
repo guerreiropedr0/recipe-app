@@ -1,20 +1,27 @@
-<h1>Foods#index</h1>
-<p>Find me in app/views/foods/index.html.erb</p>
-<%if @foods.present? %>
-<ul>
-  <li>
-    <span>Name</span>
-    <span> Measurement Unit </span>
-    <span> Price </span>
-  </li>
-  <% @foods.each do | food | %>
-    <li>
-      <span><%= food.name %></span>
-      <span><%= food.measurement_unit %></span>
-      <span><%= food.price %></span>
-    </li>
-    <% end %>
-</ul>
-<% else %>
-  <p> There are no registered foods, yet.
-<% end %>
+<section class="d-flex flex-column container">
+  <%= link_to "Add Food", new_food_path, class: "btn btn-primary align-self-end" %>
+  <%if @foods.present? %>
+    <ul class="list-group border mx-0 mt-3">
+      <li class="row align-items-center p-2 bg-secondary text-white border-bottom mx-0">
+        <div class="col font-weight-bold text-capitalize"><b>Food</b></div>
+        <div class="col font-weight-bold text-capitalize"><b>Measurement Unit</b></div>
+        <div class="col font-weight-bold text-capitalize"><b>Price</b></div>
+        <div class="col font-weight-bold text-capitalize"><b>Actions</b></div>
+      </li>
+      <% @foods.each do | food | %>
+        <li class="row align-items-center p-2 border-bottom border-left border-right mx-0">
+          <div class="col"><%= food.name %></div>
+          <div class="col"><%= food.measurement_unit %></div>
+          <div class="col"><%= food.price %></div>
+          <div class="col">
+            <%= button_to "Delete", food_path(food), class: "btn btn-danger", method: :delete %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="border-2">
+      <p class="bg-light text-center"> There are no registered foods, yet.
+    </div>
+  <% end %>
+</section>

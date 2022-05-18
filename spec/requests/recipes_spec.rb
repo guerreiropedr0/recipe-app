@@ -50,7 +50,7 @@ RSpec.describe 'Recipes', type: :request do
     end
 
     it 'should have boilerplate text content' do
-      expect(response.body).to include('This will be all recipes that are public')
+      expect(response.body).to include('Public Recipes')
     end
   end
 end

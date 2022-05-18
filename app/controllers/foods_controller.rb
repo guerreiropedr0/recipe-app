@@ -18,7 +18,7 @@ class FoodsController < ApplicationController
       if @food.save
         format.html { redirect_to foods_path, notice: 'Food created successfully!' }
       else
-        format.html { redirect_to foods_path, alert: 'Something went wrong! Food was not created!' }
+        format.html { render action: 'new', alert: 'Something went wrong! Food was not created!' }
       end
     end
   end

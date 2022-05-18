@@ -1,19 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Foods', type: :request do
-  # let(:user) do
-  #   FactoryBot.create(:user,
-  #                     name: 'Adam',
-  #                     email: 'adam@mail.com',
-  #                     password: 'password',
-  #                     password_confirmation: 'password')
-  # end
-
-  # before(:example) do
-  #   user.confirm
-  #   sign_in user
-  # end
-
   Food.delete_all
   User.delete_all
   user = User.new(name: 'Adam',
@@ -25,7 +12,6 @@ RSpec.describe 'Foods', type: :request do
                   price: 1.15,
                   user: user)
   before(:all) do
-    # User.delete_all
     user.save
     food.save
     user.confirm

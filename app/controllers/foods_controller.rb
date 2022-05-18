@@ -24,14 +24,12 @@ class FoodsController < ApplicationController
   end
 
   def destroy
-    @food = Food.find(params[:id])
-    @food.destroy
-    respond_to do |format|
-      if @food.nil?
-        format.html { redirect_to foods_path, status: :success, notice: 'Food successfully deleted!' }
-      else
-        format.html { redirect_to foods_path, alert: 'Food is not deleted!' }
-      end
+    @food = Food.find(params[:id]).destroy
+
+    if @food.destroyed?
+      redirect_to foods_path, notice: 'Food successfully deleted!'
+    else
+      redirect_to foods_path, alert: 'Food is not deleted!'
     end
   end
 

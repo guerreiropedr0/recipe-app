@@ -13,7 +13,9 @@
           <div class="col"><%= food.name %></div>
           <div class="col"><%= food.measurement_unit %></div>
           <div class="col"><%= food.price %></div>
-          <div class="col"> <button class="btn btn-danger">delete</button> </div>
+          <div class="col">
+            <%= button_to "Delete", food_path(food), class: "btn btn-danger", method: :delete %>
+          </div>
         </li>
       <% end %>
     </ul>

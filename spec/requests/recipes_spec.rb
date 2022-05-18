@@ -16,8 +16,19 @@ RSpec.describe 'Recipes', type: :request do
   end
 
   describe 'GET /recipes/:id' do
+    let(:user) do
+      FactoryBot.create(:user, name: 'Pedro Guerreiro', email: 'pedro@domain.com', password: '123456',
+                               password_confirmation: '123456')
+    end
+
+    let(:recipe) do
+      FactoryBot.create(:recipe, name: 'French macaroons', preparation_time: '20', cooking_time: '15',
+                                 description: 'Delicious snack', public: true,
+                                 user_id: user.id)
+    end
+
     before :example do
-      get recipe_path(id: 1)
+      get recipe_path(id: recipe.id)
     end
 
     it 'should render show view' do
@@ -25,7 +36,7 @@ RSpec.describe 'Recipes', type: :request do
     end
 
     it 'should have boilerplate text content' do
-      expect(response.body).to include('This will be specific recipe')
+      expect(response.body).to include(recipe.name)
     end
   end
 

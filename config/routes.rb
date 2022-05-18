@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :recipes, only: [:index, :show, :new, :create, :destroy]
-  resources :inventories, only: %i[index show]
+  resources :inventories, only: %i[index show new create destroy]
 
   get '/public_recipes', to: 'recipes#public_recipes'
 end

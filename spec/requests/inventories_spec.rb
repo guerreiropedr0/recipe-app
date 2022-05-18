@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Inventories', type: :request do
   describe 'GET /index' do
     before :example do
+      get '/users/sign_in'
       get inventories_path
     end
 

@@ -52,7 +52,7 @@ RSpec.describe 'Foods', type: :request do
   describe 'POST /foods' do
     it 'returns http success' do
       post '/foods', params: { food: { name: food.name, measurement_unit: food.measurement_unit, price: food.price } }
-      expect(response).to have_http_status(302)
+      expect(response).to have_http_status(200)
     end
   end
 

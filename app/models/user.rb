@@ -30,6 +30,7 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :recipes
+  has_many :inventories
   has_many :foods
 
   validates :name, length: { maximum: 100 }, presence: true

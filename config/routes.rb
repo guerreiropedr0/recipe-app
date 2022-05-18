@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  get 'inventories/index'
-  get 'inventories/show'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  devise_for :users
   # Defines the root path route ("/")
-  # root "articles#index"
-  resources :recipes, only: [:index, :show]
+  root "home#index"
+
+  resources :recipes, only: [:index, :show, :new, :create, :destroy]
   resources :inventories, only: %i[index show]
+
   get '/public_recipes', to: 'recipes#public_recipes'
 end

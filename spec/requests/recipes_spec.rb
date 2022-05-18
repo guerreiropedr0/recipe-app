@@ -11,7 +11,7 @@ RSpec.describe 'Recipes', type: :request do
     end
 
     it 'should have boilerplate text content' do
-      expect(response.body).to include('This will be all the recipes for a given user')
+      expect(response.body).to include('Your Recipes')
     end
   end
 

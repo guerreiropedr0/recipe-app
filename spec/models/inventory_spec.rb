@@ -19,20 +19,31 @@
 require 'rails_helper'
 
 RSpec.describe Inventory, type: :model do
-  describe 'Inventory model' do
-    let(:user) { FactoryBot.create(:user, name: 'John') }
-    let(:inventory) { FactoryBot.create(:inventory, name: 'Edward', user_id: user.id) }
+  let(:user) do
+    FactoryBot.create(:user, name: 'John')
+  end
+
+  let(:inventory) do
+    FactoryBot.create(:inventory, name: 'Edward', user_id: user.id)
   end
 
   before { inventory.save }
 
-  it 'should check for valid attributes' do
-    expect(inventory).to be_valid
-  end
+  context 'Inventory models' do
+    it 'should check for valid attributes' do
+      expect(inventory).to be_valid
+    end
 
-  it 'should be invalid without name attribute' do
-    inventory.name = ''
+    it 'should be invalid without name attribute' do
+      inventory.name = ''
 
-    expect(inventory).to_not be_valid
+      expect(inventory).to_not be_valid
+    end
+
+    it 'should be invalid without the user id' do
+      inventory.user_id = ''
+
+      expect(inventory).to_not be_valid
+    end
   end
 end

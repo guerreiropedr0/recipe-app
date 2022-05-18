@@ -20,6 +20,6 @@ class RecipesController < ApplicationController
   end
 
   def public_recipes
-    @recipes = Recipe.where(public: true).order('created_at Desc')
+    @recipes = Recipe.where(public: true).order(created_at: :desc)
   end
 end

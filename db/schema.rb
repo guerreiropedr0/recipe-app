@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_005355) do
   end
 
   create_table "recipe_foods", force: :cascade do |t|
-    t.integer "quantity"
+    t.integer "quantity", default: 0
     t.bigint "recipe_id", null: false
     t.bigint "food_id", null: false
     t.datetime "created_at", null: false
@@ -85,8 +85,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_005355) do
 
   add_foreign_key "foods", "users"
   add_foreign_key "inventories", "users"
+<<<<<<< HEAD
+=======
   add_foreign_key "inventory_foods", "foods"
   add_foreign_key "inventory_foods", "inventories"
+>>>>>>> 9fdbff8f00b24736ae7b78ad19a89fa6c9c5283a
   add_foreign_key "recipe_foods", "foods"
   add_foreign_key "recipe_foods", "recipes"
   add_foreign_key "recipes", "users"

@@ -19,5 +19,7 @@ class RecipesController < ApplicationController
     redirect_to root_path, notice: 'Successfully deleted recipe.' if Recipe.destroy(params[:id])
   end
 
-  def public_recipes; end
+  def public_recipes
+    @recipes = Recipe.where(public: true).order(created_at: :desc)
+  end
 end

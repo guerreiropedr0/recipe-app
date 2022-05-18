@@ -21,7 +21,13 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-  let(:user) { FactoryBot.create(:user, name: 'Tekle') }
+  let(:user) do
+    FactoryBot.create(:user,
+                      name: 'Adam',
+                      email: 'adam@mail.com',
+                      password: 'password',
+                      password_confirmation: 'password')
+  end
   let(:food) do
     FactoryBot.create(:food,
                       name: 'Apple',

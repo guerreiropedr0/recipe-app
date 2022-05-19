@@ -26,17 +26,6 @@
       <%= form.check_box :public, class: "form-check-input" %>
     </div>
 
-    <div class="form-group mb-3">
-      <%= form.label :foods %><br>
-      <%= form.select :foods,
-        options_from_collection_for_select(@foods, :id, :name),
-        { include_blank: true },
-        multiple: true,
-        size: 5,
-        class: 'form-select'
-      %>
-    </div>
-
     <%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %>
   <% end %>
 </div>

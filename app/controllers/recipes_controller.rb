@@ -24,12 +24,6 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      selected_foods = params[:recipe][:foods]
-      selected_foods.each_with_index do |food_id, index|
-        next if index.zero?
-
-        RecipeFood.add_food(@recipe.id, food_id, 1)
-      end
       redirect_to recipes_path, notice: 'Successfully created recipe.'
     else
       flash.now[:alert] = 'Could not create recipe.'

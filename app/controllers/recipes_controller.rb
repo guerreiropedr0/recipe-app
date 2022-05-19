@@ -11,9 +11,25 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find_by(id: params[:id])
   end
 
-  def new; end
+  def new
+    if current_user
+      @recipe = Recipe.new
+      @foods = Food.all
+    else
+      redirect_to root_path, alert: 'You need to login in order to create a recipe.'
+    end
+  end
 
-  def create; end
+  def create
+    @recipe = Recipe.new(recipe_params)
+
+    if @recipe.save
+      redirect_to recipes_path, notice: 'Successfully created recipe.'
+    else
+      flash.now[:alert] = 'Could not create recipe.'
+      render :new
+    end
+  end
 
   def destroy
     redirect_to root_path, notice: 'Successfully deleted recipe.' if Recipe.destroy(params[:id])
@@ -21,5 +37,13 @@ class RecipesController < ApplicationController
 
   def public_recipes
     @recipes = Recipe.where(public: true).order(created_at: :desc)
+  end
+
+  private
+
+  def recipe_params
+    recipe_hash = params.require(:recipe).permit(:name, :description, :cooking_time, :preparation_time, :public)
+    recipe_hash[:user] = current_user
+    recipe_hash
   end
 end

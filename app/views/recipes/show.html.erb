@@ -19,7 +19,7 @@
   <div class="d-flex justify-content-between w-50 flex-wrap">
   <%= link_to "Generate shopping list", "/", class: "btn btn-primary m-1" %>
   <!-- No shopping list yet, so redirecting to root -->
-  <%= link_to "Add ingredient", new_food_path, class: "btn btn-primary m-1" if @recipe.user == current_user %>
+  <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-primary m-1" if @recipe.user == current_user %>
   </div>
   <% else %>
     <h1>You are not authorized to see this recipe.</h1>

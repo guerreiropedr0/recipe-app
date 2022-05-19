@@ -1,7 +1,7 @@
 class InventoriesController < ApplicationController
   def index
     if current_user
-      @inventory = Inventory.where(user_id: current_user.id)
+      @inventories = Inventory.where(user_id: current_user.id)
     else
       flash[:alert] = 'You need to log in as a user for you to access your inventries!'
     end
@@ -13,5 +13,7 @@ class InventoriesController < ApplicationController
 
   def create; end
 
-  def destroy; end
+  def destroy
+    redirect_to root_path, notice: 'Successfully deleted inventory!' if Inventory.destroy(params[:id])
+  end
 end

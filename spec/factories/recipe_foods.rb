@@ -3,7 +3,7 @@
 # Table name: recipe_foods
 #
 #  id         :bigint           not null, primary key
-#  quantity   :integer          default(1)
+#  quantity   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  food_id    :bigint           not null

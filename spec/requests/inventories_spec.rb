@@ -26,7 +26,7 @@ RSpec.describe 'Inventories', type: :request do
     end
 
     it 'should have the exact page content' do
-      expect(response.body).to include('This page would be for a specific inventory')
+      expect(response.body).to include('Your Inventories')
     end
   end
 end

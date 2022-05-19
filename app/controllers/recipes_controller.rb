@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
   def new
     if current_user
       @recipe = Recipe.new
+      @foods = Food.all
     else
       redirect_to root_path, alert: 'You need to login in order to create a recipe.'
     end
@@ -21,9 +22,14 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-    @recipe.user = current_user
 
     if @recipe.save
+      selected_foods = params[:recipe][:foods]
+      selected_foods.each_with_index do |food_id, index|
+        next if index.zero?
+
+        RecipeFood.add_food(@recipe.id, food_id, 1)
+      end
       redirect_to recipes_path, notice: 'Successfully created recipe.'
     else
       flash.now[:alert] = 'Could not create recipe.'
@@ -42,6 +48,8 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :cooking_time, :preparation_time, :public)
+    recipe_hash = params.require(:recipe).permit(:name, :description, :cooking_time, :preparation_time, :public)
+    recipe_hash[:user] = current_user
+    recipe_hash
   end
 end

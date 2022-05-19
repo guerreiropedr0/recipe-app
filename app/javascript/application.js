@@ -2,3 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
+
+function onClick() {
+  alert('hello');
+}

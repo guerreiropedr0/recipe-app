@@ -1,24 +1,24 @@
 <nav class="navbar d-flex flex-row justify-content-between navbar-expand-lg navbar-dark bg-dark px-5">
-  <%= link_to "Recipe App", root_path, class: "navbar-brand" %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse justify-content-end align-items-baseline" id="navbarTogglerDemo02">
-    <% if user_signed_in? %>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
+  <div class="container-fluid d-flex">
+    <%= link_to "Recipe App", root_path, class: "navbar-brand flex-fill" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end align-items-baseline" id="navbarSupportedContent">
+      <% if user_signed_in? %>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
           <%= link_to "Recipes", recipes_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "Foods", foods_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item dropdown">
           <%= link_to "Inventories", inventories_path, class: "nav-link" %>
         </li>
       </ul>
-    <% end %>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0m px-5">
+      <% end %>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0m">
       <% if user_signed_in? %>
         <li class="nav-item">
           <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-warning mb-1" %>
@@ -32,5 +32,6 @@
         </li>
       <% end %>
     </ul>
+    </div>
   </div>
 </nav>

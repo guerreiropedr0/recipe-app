@@ -75,6 +75,7 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cancancan (3.3.0)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     cssbundling-rails (1.1.0)
@@ -255,6 +256,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bootsnap
+  cancancan
   cssbundling-rails
   debug
   devise

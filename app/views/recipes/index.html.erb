@@ -1,23 +1,21 @@
-<div class="container mt-3">
-  <h1 class="text-center mb-3">Your Recipes</h1>
-  <% if current_user %>
-    <%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary" %> <!-- No layout design, it will look better on navbar -->
-    <% if @recipes.empty? %>
-      <div>
-        <h3 class="text-center">No recipes yet.</h3>
-      </div>
-    <% else %>
-      <% @recipes.each do |recipe| %>
-        <div class="d-flex justify-content-center align-items-baseline gap-5 bg-light border w-75 m-auto p-3">
-          <div class="d-flex flex-column align-items-center flex-grow-1">
-            <h3 class="text-center"><%= link_to recipe.name, recipe_path(id: recipe.id), class: "text-dark" %></h3>
-            <%= link_to "REMOVE", recipe_path(id: recipe.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-          </div>
-          <div class="flex-grow-1" style="max-height: 200px; overflow: auto">
-            <p><%= recipe.description %></p>
-          </div>
+<div class="container mt-3 d-flex flex-column align-items-center">
+  <h1>Your Recipes</h1>
+  <%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary align-self-end" %> <!-- No layout design, it will look better on navbar -->
+  <% if @recipes.empty? %>
+    <div>
+      <h3 class="text-center">No recipes yet.</h3>
+    </div>
+  <% else %>
+    <% @recipes.each do |recipe| %>
+      <div class="d-flex justify-content-center align-items-baseline gap-5 bg-light border w-75 m-auto p-3 my-3">
+        <div class="d-flex flex-column align-items-center flex-grow-1">
+          <h3 class="text-center"><%= link_to recipe.name, recipe_path(id: recipe.id), class: "text-dark" %></h3>
+          <%= link_to "REMOVE", recipe_path(id: recipe.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         </div>
-      <% end %>
+        <div class="flex-grow-1" style="max-height: 200px; overflow: auto">
+          <p><%= recipe.description %></p>
+        </div>
+      </div>
     <% end %>
   <% end %>
 </div>

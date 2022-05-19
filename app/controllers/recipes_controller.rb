@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!, only: %i[index new create destroy]
+
+  load_and_authorize_resource
+
   def index
-    if current_user
-      @recipes = Recipe.where(user_id: current_user.id)
-    else
-      flash[:alert] = 'You need to login in order to see your recipes.'
-    end
+    @recipes = Recipe.where(user_id: current_user&.id)
   end
 
   def show
@@ -12,12 +12,8 @@ class RecipesController < ApplicationController
   end
 
   def new
-    if current_user
-      @recipe = Recipe.new
-      @foods = Food.all
-    else
-      redirect_to root_path, alert: 'You need to login in order to create a recipe.'
-    end
+    @recipe = Recipe.new
+    @foods = Food.all
   end
 
   def create

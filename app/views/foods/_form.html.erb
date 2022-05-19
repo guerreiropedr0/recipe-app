@@ -1,18 +1,20 @@
-<h2>Add new food:</h2>
-<%= form_with model: @food do |form| %>
-  <p>
-    <%= form.label :name %> <br>
-    <%= form.text_field :name %>
-  </p>
+<div class="container d-flex flex-column align-items-center">
+  <h2>Add new food</h2>
+  <%= form_with model: @food do |form| %>
+    <div class="form-group mb-3">
+      <%= form.label :name %> <br>
+      <%= form.text_field :name %>
+    </div>
 
-  <p>
-    <%= form.label :measurement_unit %> <br>
-    <%= form.text_field :measurement_unit %>
-  </p>
+    <div class="form-group mb-3">
+      <%= form.label :measurement_unit %> <br>
+      <%= form.text_field :measurement_unit %>
+    </div>
 
-  <p>
-    <%= form.label :price %> <br>
-    <%= form.number_field :price, step: 0.01 %>
-  </p>
-  <p><%= form.submit "Create", data: { turbo: false } %></p>
-<% end %>
+    <div class="form-group mb-3">
+      <%= form.label :price %> <br>
+      <%= form.number_field :price, step: 0.01 %>
+    </div>
+    <p><%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %></p>
+  <% end %>
+</div>

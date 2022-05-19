@@ -4,7 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+  <div class="collapse navbar-collapse justify-content-end align-items-baseline" id="navbarTogglerDemo02">
     <% if user_signed_in? %>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
@@ -21,7 +21,7 @@
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0m px-5">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-warning mb-1" %>
         </li>
       <% else %>
         <li class="nav-item active">

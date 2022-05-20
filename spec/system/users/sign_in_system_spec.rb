@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'LoginPages', type: :system do
   before(:all) do
-    # Comment the line below this to see selinium open chrome browser
     driven_by(:rack_test)
-    user = User.find_by(email: 'adam@domain.com')
-    user.confirm
   end
 
   it 'renders sign in page' do

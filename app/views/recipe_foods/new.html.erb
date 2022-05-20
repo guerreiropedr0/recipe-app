@@ -1,14 +1,16 @@
 <div class="container d-flex flex-column align-items-center">
-  <h2>Add new food to recipe:</h2>
-  <%= form_with url: recipe_recipe_foods_path do |form| %>
+  <% if current_user.id == @recipe.user_id %>
+    <h2>Add new food to recipe:</h2>
+    <%= form_with url: recipe_recipe_foods_path do |form| %>
 
-    <%= select("food", "food_id", Food.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Food' }) %>
+      <%= select("food", "food_id", Food.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Food' }) %>
 
-    <div class="form-group mb-3">
-      <%= form.label :quantity %> <br>
-      <%= form.number_field :quantity, class: "form-control" , required: true %>
-    </div>
+      <div class="form-group mb-3">
+        <%= form.label :quantity %> <br>
+        <%= form.number_field :quantity, class: "form-control" , required: true %>
+      </div>
 
-    <%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %>
+      <%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %>
+    <% end %>
   <% end %>
 </div>

@@ -22,43 +22,34 @@ RSpec.describe 'Recipes', type: :system do
       fill_in('Password', with: '123456')
       click_button('Log in')
 
-      visit recipes_path
-    end
-
-    it 'should display welcoming message' do
-      expect(page).to have_content('Your Recipes')
+      visit recipe_path(id: @recipe.id)
     end
 
     it 'should display recipe name' do
       expect(page).to have_content(@recipe.name)
     end
 
-    it 'should display recipe description' do
-      expect(page).to have_content(@recipe.description)
+    it 'should display recipe preparation time' do
+      expect(page).to have_content("Preparation time: #{@recipe.preparation_time} minutes")
+    end
+
+    it 'should display recipe preparation time' do
+      expect(page).to have_content("Cooking time: #{@recipe.cooking_time} minutes")
+    end
+
+    it 'should display boilerplate text for steps' do
+      expect(page).to have_content('Steps go here...')
     end
 
     it 'should find all clickable links' do
-      find_link('REMOVE')
-      find_link(@recipe.name)
-      find_link('New Recipe')
+      find_link('Generate shopping list')
+      find_link('Add ingredient')
     end
 
-    it 'should click remove link and remove recipe' do
-      click_link('REMOVE')
+    it 'should click add ingredient link and redirect to new recipe_food form' do
+      click_link('Add ingredient')
 
-      expect(page).to_not have_content(@recipe.name)
-    end
-
-    it 'should click new recipe link and redirect to new recipe form' do
-      click_link('New Recipe')
-
-      expect(page).to have_current_path(new_recipe_path)
-    end
-
-    it 'should click recipe link and redirect to recipe details' do
-      click_link(@recipe.name)
-
-      expect(page).to have_current_path(recipe_path(id: @recipe.id))
+      expect(page).to have_current_path(new_recipe_recipe_food_path(recipe_id: @recipe.id))
     end
   end
 end

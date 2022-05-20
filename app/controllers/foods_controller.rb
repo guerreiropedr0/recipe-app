@@ -1,4 +1,7 @@
 class FoodsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
+
   def index
     @foods = Food.where(user: current_user)
   end

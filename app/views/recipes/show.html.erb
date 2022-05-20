@@ -24,4 +24,27 @@
   <% else %>
     <h1>You are not authorized to see this recipe.</h1>
   <% end %>
+  <% if @recipe_foods.empty? %>
+    <h4 class="mt-5">No foods added yet.</h4>
+  <% else %>
+    <ul class="list-group border mx-0 mt-5 w-75">
+        <li class="row align-items-center p-2 bg-secondary text-white border-bottom mx-0">
+          <div class="col font-weight-bold text-capitalize"><b>Food</b></div>
+          <div class="col font-weight-bold text-capitalize"><b>Quantity</b></div>
+          <div class="col font-weight-bold text-capitalize"><b>Value</b></div>
+          <div class="col font-weight-bold text-capitalize"><b>Actions</b></div>
+        </li>
+        <% @recipe_foods.each do | recipe_food | %>
+          <li class="row align-items-center p-2 border-bottom border-left border-right mx-0">
+            <div class="col"><%= recipe_food.food.name %></div>
+            <div class="col"><%= recipe_food.quantity %></div>
+            <div class="col">$<%= total_price(recipe_food.id) %></div>
+            <div class="col">
+              <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), class: "btn btn-dark" %>
+              <%= link_to "Remove", recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
 </div>

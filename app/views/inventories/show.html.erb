@@ -2,8 +2,8 @@
   <% if @inventory.user == current_user %>
   <h1><%= @inventory.name %></h1>
 
-  <div class="d-flex justify-content-between w-50 flex-wrap">
-    <%= link_to "Add Food", new_food_path, class: "btn btn-primary m-1" if @inventory.user == current_user %>
+  <div class="row align-self-end">
+    <%= link_to "Add Food", new_inventory_inventory_food(@inventory.id), class: "btn btn-primary m-1" if @inventory.user == current_user %>
   </div>
 
   <% else %>

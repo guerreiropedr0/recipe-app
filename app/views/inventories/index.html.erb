@@ -1,7 +1,9 @@
 <div class="container mt-3">
   <h1 class="text-center mb-3">Your Inventories</h1>
   <% if current_user %>
-    <%= link_to "New Inventory", new_inventory_path, class: "btn btn-primary" %>
+    <div class="row align-self-end">
+      <%= link_to "New Inventory", new_inventory_path, class: "btn btn-primary" %>
+    </div>
     <% if @inventories.empty? %>
       <div>
         <h3 class="text-center">No inventory yet.</h3>

@@ -20,7 +20,7 @@
     <% @recipe_food.each do |food|%>
     <tr>
       <td><%= food.food.name%></th>
-      <td><%= food.quantity%><%= food.food.measurementUnit  %></td>
+      <td><%= food.quantity%><%= food.food.measurement_unit  %></td>
       <td><%= food.quantity * food.food.price %></td>
     </tr>
   

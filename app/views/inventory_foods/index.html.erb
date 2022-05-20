@@ -1,0 +1,10 @@
+<div class="container">
+<%= render partial: 'layouts/flash' %>
+<div class="w-75 mx-auto">
+<div class="d-flex justify-content-between">
+  <p class="fs-1">Inventory: <%= @current_inventory.name.capitalize %></p>
+  <%= render 'button' %>
+</div>
+<%= render partial: 'table', locals: { inventorylist: @inventory_food_list }%>
+</div>
+</div>

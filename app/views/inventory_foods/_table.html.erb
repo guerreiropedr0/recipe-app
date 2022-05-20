@@ -1,0 +1,24 @@
+<div class="container">
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% inventorylist.each do |list| %>
+    <tr>
+      <td><%= Food.find(list.food_id).name %></td>
+      <td><%= list.quantity %> <%= Food.find(list.food_id).measurement_unit %></td>
+      <td>
+      <% if check_owner(params[:inventory_id]) %>
+        <%= link_to 'Remove', inventory_inventory_food_path(list.inventory_id, list.id), method: :delete, class: "align-text-bottom btn btn-secondary" %>
+      <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

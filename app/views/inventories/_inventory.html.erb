@@ -1,0 +1,16 @@
+<% @inventories.each do |inventory| %>
+  <div class=" card mb-3 mt-3">
+  <div class="row g-0">
+    <div class="col-md-4 d-flex flex-column align-items-center justify-content-around">
+      <h3 class="card-title text-center"><%= inventory.name %></h3>
+      <%= link_to 'Remove', inventory_path(inventory), method: :delete , class: "align-text-bottom btn btn-secondary" %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body d-flex flex-column align-items-center justify-content-around">
+        <p class="card-text"><%= inventory.description %></p>
+        <%=  link_to 'Check Inventory', inventory_inventory_foods_path(inventory.id), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

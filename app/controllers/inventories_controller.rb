@@ -7,15 +7,26 @@ class InventoriesController < ApplicationController
     end
   end
 
-  def show
-    @inventory = Inventory.find_by(id: params[:id])
-  end
-
   def new; end
 
-  def create; end
+  def create
+    @inventory = Inventory.new(inventory_params)
+    if @inventory.valid?
+      @inventory.save
+      @inventories = Inventory.where(user_id: current_user.id)
+      render :index
+    else
+      redirect_to new_inventory_path
+    end
+  end
 
   def destroy
-    redirect_to root_path, notice: 'Successfully deleted inventory!' if Inventory.destroy(params[:id])
+    redirect_to inventories_path, notice: 'Successfully deleted inventory!' if Inventory.destroy(params[:id])
+  end
+
+  private
+
+  def inventory_params
+    params.require(:inventory).permit(:name, :description, :user_id)
   end
 end

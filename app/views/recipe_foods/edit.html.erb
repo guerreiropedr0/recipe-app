@@ -1,0 +1,12 @@
+<div class="container d-flex flex-column align-items-center">
+  <h2>Edit food quantity for recipe:</h2>
+  <%= form_with(model: @recipe_food, url: recipe_recipe_food_path, method: "patch") do |form| %>
+
+    <div class="form-group mb-3">
+      <%= form.label :quantity %> <br>
+      <%= form.number_field :quantity, class: "form-control" , required: true %>
+    </div>
+
+    <%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %>
+  <% end %>
+</div>

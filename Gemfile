@@ -80,6 +80,7 @@ group :development do
   gem 'letter_opener'
 end
 
-# group :test do
-#   gem 'capybara'
-# end
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+end

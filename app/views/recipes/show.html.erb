@@ -68,11 +68,16 @@
       </div>
       <div class="modal-body">
         <h6>Choose an inventory to use</h6>
-        <%= select("inventory", "inventory_id", Inventory.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Inventory' }) %>
+        <%= form_with url: shopping_lists_path, method: :get do |form| %>
+          <%= select("inventory", "inventory_id", Inventory.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Inventory' }) %>
+          <div class="field form-group mb-3">
+            <%= form.number_field :recipe_id, class: "form-control", value: @recipe.id, hidden: true %>
+          </div>
       </div>
       <div class="modal-footer">
-        <%= link_to "Generate", '/', class: "btn btn-primary" %>
+        <%= form.submit "Generate", data: { turbo: false }, class: "btn btn-primary" %>
         <!-- Waiting for implementation -->
+        <% end %>
       </div>
     </div>
   </div>

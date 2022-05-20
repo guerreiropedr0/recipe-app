@@ -36,6 +36,8 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 
 gem 'devise'
 
+gem 'cancancan'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -68,6 +70,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'annotate'
+  gem 'bullet'
   gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
@@ -75,8 +78,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'letter_opener'
 end
 
-# group :test do
-#   gem 'capybara'
-# end
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+end

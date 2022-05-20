@@ -6,7 +6,8 @@ RSpec.describe 'Recipes', type: :system do
                              password_confirmation: '123456')
   end
 
-  context 'index page' do
+  # rubocop:disable Metrics/BlockLength
+  context 'new page' do
     before(:each) do
       driven_by(:rack_test)
 
@@ -55,4 +56,5 @@ RSpec.describe 'Recipes', type: :system do
       expect(page).to have_content('Successfully created recipe.')
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

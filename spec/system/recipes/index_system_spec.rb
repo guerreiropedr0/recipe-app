@@ -6,6 +6,7 @@ RSpec.describe 'Recipes', type: :system do
                              password_confirmation: '123456')
   end
 
+  # rubocop:disable Metrics/BlockLength
   context 'index page' do
     before(:each) do
       driven_by(:rack_test)
@@ -61,4 +62,5 @@ RSpec.describe 'Recipes', type: :system do
       expect(page).to have_current_path(recipe_path(id: @recipe.id))
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

@@ -77,6 +77,9 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet (7.0.1)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     cancancan (3.3.0)
     capybara (3.37.1)
       addressable
@@ -260,6 +263,7 @@ GEM
     tzinfo-data (1.2022.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
+    uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -281,6 +285,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bootsnap
+  bullet
   cancancan
   capybara
   cssbundling-rails

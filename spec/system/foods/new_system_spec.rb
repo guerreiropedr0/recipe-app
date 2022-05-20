@@ -5,6 +5,7 @@ RSpec.describe 'Foods', type: :system do
     driven_by(:rack_test)
   end
 
+  # rubocop:disable Metrics/BlockLength
   context 'add new food page' do
     before :each do
       visit '/users/sign_in'
@@ -15,13 +16,13 @@ RSpec.describe 'Foods', type: :system do
       click_button 'Log in'
     end
 
-    it "should render add new food view" do
+    it 'should render add new food view' do
       visit foods_path
       click_link('Add Food')
 
-      expect(page).to have_field("Name")
-      expect(page).to have_field("Measurement unit")
-      expect(page).to have_field("Price")
+      expect(page).to have_field('Name')
+      expect(page).to have_field('Measurement unit')
+      expect(page).to have_field('Price')
       expect(page).to have_selector('input[name="commit"]')
     end
 
@@ -70,4 +71,5 @@ RSpec.describe 'Foods', type: :system do
       expect(page).to have_content('Price must be greater than 0.0')
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

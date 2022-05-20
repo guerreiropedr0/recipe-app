@@ -12,8 +12,11 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
-    @foods = Food.all
+    if current_user
+      @recipe = Recipe.new
+    else
+      redirect_to root_path, alert: 'You need to login in order to create a recipe.'
+    end
   end
 
   def create
@@ -22,13 +25,18 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to recipes_path, notice: 'Successfully created recipe.'
     else
-      flash.now[:alert] = 'Could not create recipe.'
-      render :new
+      render :new, alert: 'Could not create recipe.'
     end
   end
 
   def destroy
-    redirect_to root_path, notice: 'Successfully deleted recipe.' if Recipe.destroy(params[:id])
+    @recipe = Recipe.destroy(params[:id])
+
+    if @recipe.destroyed?
+      redirect_to recipes_path, notice: 'Successfully deleted recipe.'
+    else
+      render :new, alert: 'Could not delete recipe.'
+    end
   end
 
   def public_recipes

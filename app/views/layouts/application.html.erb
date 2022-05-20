@@ -11,10 +11,10 @@
   </head>
 
   <body>
-    <div class="alert">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
-    <%= yield %>
+    <%= render "layouts/header" %>
+    <main class="container my-5">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
   </body>
 </html>

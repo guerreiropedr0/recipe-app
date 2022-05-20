@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Inventories', type: :system do
+  # rubocop:disable Metrics/BlockLength
   context 'inventory index page' do
     before(:each) do
       driven_by(:rake_test)
@@ -50,4 +51,5 @@ RSpec.describe 'Inventories', type: :system do
       expect(page).to have_current_path(inventory_path(id: @inventory.id))
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

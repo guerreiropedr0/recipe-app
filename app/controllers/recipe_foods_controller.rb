@@ -17,4 +17,14 @@ class RecipeFoodsController < ApplicationController
       render :new, alert: 'Something happened.'
     end
   end
+
+  def destroy
+    @recipe_food = RecipeFood.destroy(params[:id])
+
+    if @recipe_food.destroyed?
+      redirect_to recipes_path, notice: 'Successfully deleted ingredient.'
+    else
+      render :new, alert: 'Could not delete ingredient.'
+    end
+  end
 end

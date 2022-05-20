@@ -7,7 +7,9 @@ class InventoriesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @inventory = Inventory.find_by(id: params[:id])
+  end
 
   def new; end
 

@@ -5,16 +5,17 @@ RSpec.describe 'LoginPages', type: :system do
     driven_by(:rack_test)
   end
 
-  it 'renders sign in page' do
+  before :each do
     visit '/users/sign_in'
+  end
 
+  it 'renders sign in page' do
     expect(page).to have_field('user_email')
     expect(page).to have_field('user_password')
     expect(page).to have_button('Log in')
   end
 
   it 'Error: Invalid Email or password with empty email and password' do
-    visit '/users/sign_in'
     within('#new_user') do
       fill_in 'Email', with: ''
       fill_in 'Password', with: ''
@@ -24,7 +25,6 @@ RSpec.describe 'LoginPages', type: :system do
   end
 
   it 'Error: Invalid Email or password with wrong password' do
-    visit '/users/sign_in'
     within('#new_user') do
       fill_in 'Email', with: 'adam@domain.com'
       fill_in 'Password', with: '123456'
@@ -34,7 +34,6 @@ RSpec.describe 'LoginPages', type: :system do
   end
 
   it 'Error: Invalid Email or password with wrong email' do
-    visit '/users/sign_in'
     within('#new_user') do
       fill_in 'Email', with: 'eve@domain.com'
       fill_in 'Password', with: 'password'
@@ -44,7 +43,6 @@ RSpec.describe 'LoginPages', type: :system do
   end
 
   it 'signs me in with valid email and password' do
-    visit '/users/sign_in'
     within('#new_user') do
       fill_in 'Email', with: 'adam@domain.com'
       fill_in 'Password', with: 'password'

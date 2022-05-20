@@ -1,4 +1,7 @@
 class InventoriesController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
+
   def index
     if current_user
       @inventory = Inventory.where(user_id: current_user.id)

@@ -17,9 +17,13 @@
     <p class="fs-5">Steps go here...</p>
   </div>
   <div class="d-flex justify-content-between w-50 flex-wrap">
-  <%= link_to "Generate shopping list", "/", class: "btn btn-primary m-1" %>
-  <!-- No shopping list yet, so redirecting to root -->
-  <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-primary m-1" if @recipe.user == current_user %>
+    <button type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop">
+        Generate shopping list
+    </button>
+    <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-primary m-1" if @recipe.user == current_user %>
   </div>
   <% else %>
     <h1>You are not authorized to see this recipe.</h1>
@@ -47,4 +51,29 @@
         <% end %>
       </ul>
   <% end %>
+</div>
+
+<div class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Generating Shopping List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6>Choose an inventory to use</h6>
+        <%= select("inventory", "inventory_id", Inventory.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Inventory' }) %>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Generate", '/', class: "btn btn-primary" %>
+        <!-- Waiting for implementation -->
+      </div>
+    </div>
+  </div>
 </div>

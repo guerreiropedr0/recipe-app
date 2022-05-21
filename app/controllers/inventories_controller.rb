@@ -3,7 +3,7 @@ class InventoriesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @inventories = Inventory.where(user_id: current_user.id) 
+    @inventories = Inventory.where(user_id: current_user.id)
   end
 
   def show; end
@@ -22,7 +22,15 @@ class InventoriesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @inventory = Inventory.destroy(params[:id])
+
+    if @inventory.destroyed?
+      redirect_to inventories_path, notice: 'Successfully deleted inventory.'
+    else
+      render :new, alert: 'Could not delete inventory.'
+    end
+  end
 
   private
 

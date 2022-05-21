@@ -6,7 +6,10 @@ class InventoriesController < ApplicationController
     @inventories = Inventory.where(user_id: current_user.id)
   end
 
-  def show; end
+  def show
+    @inventory = Inventory.find_by(id: params[:id])
+    @inventory_foods = InventoryFood.where(inventory_id: params[:id]).includes([:food])
+  end
 
   def new
     @inventory = Inventory.new

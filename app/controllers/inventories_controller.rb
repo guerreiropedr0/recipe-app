@@ -3,9 +3,7 @@ class InventoriesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if current_user
-      @inventories = Inventory.where(user_id: current_user.id)
-    end
+    @inventories = Inventory.where(user_id: current_user.id) if current_user
   end
 
   def show

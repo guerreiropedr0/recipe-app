@@ -1,8 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Recipes', type: :request do
+  let(:user) do
+    FactoryBot.create(:user, name: 'Pedro Guerreiro', email: 'pedro@domain.com', password: '123456',
+                             password_confirmation: '123456')
+  end
+
   describe 'GET /index' do
     before :example do
+      user.confirm
+      sign_in user
       get recipes_path
     end
 

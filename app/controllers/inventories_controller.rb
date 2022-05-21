@@ -3,11 +3,7 @@ class InventoriesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if current_user
-      @inventory = Inventory.where(user_id: current_user.id)
-    else
-      flash[:alert] = 'You need to log in as a user for you to access your inventries!'
-    end
+    @inventories = Inventory.where(user_id: current_user.id)
   end
 
   def show
@@ -15,9 +11,35 @@ class InventoriesController < ApplicationController
     @inventory_foods = InventoryFood.where(inventory_id: params[:id]).includes([:food])
   end
 
-  def new; end
+  def new
+    @inventory = Inventory.new
+  end
 
-  def create; end
+  def create
+    @inventory = Inventory.new(inventory_params)
 
-  def destroy; end
+    if @inventory.save
+      redirect_to inventories_path, notice: 'Successfully created Inventory.'
+    else
+      render :new, alert: 'Could not create inventory.'
+    end
+  end
+
+  def destroy
+    @inventory = Inventory.destroy(params[:id])
+
+    if @inventory.destroyed?
+      redirect_to inventories_path, notice: 'Successfully deleted inventory.'
+    else
+      render :new, alert: 'Could not delete inventory.'
+    end
+  end
+
+  private
+
+  def inventory_params
+    inventory_hash = params.require(:inventory).permit(:name, :description)
+    inventory_hash[:user] = current_user
+    inventory_hash
+  end
 end

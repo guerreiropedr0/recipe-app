@@ -6,7 +6,6 @@ RSpec.describe 'Inventories', type: :system do
                              password_confirmation: '123456')
   end
 
-  # rubocop:disable Metrics/BlockLength
   context 'new page' do
     before(:each) do
       driven_by(:rack_test)
@@ -49,5 +48,4 @@ RSpec.describe 'Inventories', type: :system do
       expect(page).to have_content('Successfully created Inventory.')
     end
   end
-  # rubocop:enable Metrics/BlockLength
 end

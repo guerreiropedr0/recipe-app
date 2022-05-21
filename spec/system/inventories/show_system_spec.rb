@@ -51,8 +51,6 @@ RSpec.describe 'Inventories', type: :system do
 
       expect(page).to have_current_path(new_inventory_inventory_food_path(inventory_id: @inventory.id))
     end
-
-
   end
   # rubocop:enable Metrics/BlockLength
 end

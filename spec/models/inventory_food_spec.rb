@@ -24,15 +24,15 @@ require 'rails_helper'
 RSpec.describe InventoryFood, type: :model do
   let(:user) do
     FactoryBot.create(:user, name: 'Edward Yara', email: 'oluyaratosin123@gmail.com', password: 'root17',
-                             password_confirm: 'root17')
+                             password_confirmation: 'root17')
   end
 
   let(:inventory) do
-    FactoryBot.create(:inventory, name: 'Jonathan King', user_id: user.id)
+    FactoryBot.create(:inventory, name: 'Jonathan King', user_id: user.id, description: 'Nice')
   end
 
   let(:food) do
-    FactoryBot.create(:food, name: 'Grapes', measurement_unit: 'g', price: 1.15)
+    FactoryBot.create(:food, name: 'Grapes', measurement_unit: 'g', price: 1.15, user_id: user.id)
   end
 
   let(:inventory_food) do

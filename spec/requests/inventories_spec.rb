@@ -1,9 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe 'Inventories', type: :request do
+  let(:user) do
+    FactoryBot.create(:user, name: 'Pedro Guerreiro', email: 'pedro@domain.com', password: '123456',
+                             password_confirmation: '123456')
+  end
+
+  let(:inventory) do
+    FactoryBot.create(:inventory, name: 'Edward', user_id: user.id, description: 'Test')
+  end
+
   describe 'GET /index' do
     before :example do
-      get '/users/sign_in'
+      user.confirm
+      sign_in user
       get inventories_path
     end
 
@@ -12,13 +22,15 @@ RSpec.describe 'Inventories', type: :request do
     end
 
     it 'should have the exact page content' do
-      expect(response.body).to include('This page would be for all the listed inventories by a given user')
+      expect(response.body).to include('Your Inventories')
     end
   end
 
   describe 'GET /inventories/:id' do
     before :example do
-      get inventories_path(id: 1)
+      user.confirm
+      sign_in user
+      get inventory_path(id: inventory.id)
     end
 
     it 'should render the show view template' do
@@ -26,7 +38,7 @@ RSpec.describe 'Inventories', type: :request do
     end
 
     it 'should have the exact page content' do
-      expect(response.body).to include('This page would be for a specific inventory')
+      expect(response.body).to include(inventory.name)
     end
   end
 end

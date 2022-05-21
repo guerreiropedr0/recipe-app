@@ -21,4 +21,5 @@ class Inventory < ApplicationRecord
 
   belongs_to :user
   has_many :inventory_foods
+  validates :description, length: { in: 1..200 }
 end

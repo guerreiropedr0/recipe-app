@@ -1,0 +1,23 @@
+<div class="container mt-3 d-flex flex-column align-items-center">
+  <h1>Your Inventories</h1>
+  <% if current_user %>
+    <%= link_to "New Inventory", new_inventory_path, class: "btn btn-primary align-self-end" %> <!-- No layout design, it will look better on navbar -->
+    <% if @inventories.empty? %>
+      <div>
+        <h3 class="text-center">No inventories yet.</h3>
+      </div>
+    <% else %>
+      <% @inventories.each do |inventory| %>
+        <div class="d-flex justify-content-center align-items-baseline gap-5 bg-light border w-75 m-auto p-3 my-3">
+          <div class="d-flex flex-column align-items-center flex-grow-1">
+            <h3 class="text-center"><%= link_to inventory.name, inventory_path(id: inventory.id), class: "text-dark" %></h3>
+            <%= link_to "REMOVE", inventory_path(id: inventory.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          </div>
+          <div class="flex-grow-1" style="max-height: 200px; overflow: auto">
+            <p><%= inventory.description %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,20 @@
+<div class="container mt-3 d-flex flex-column align-items-center">
+  <h1>Public Recipes</h1>
+  <% if @recipes.empty? %>
+    <h1>No public recipes yet.</h1>
+  <% else %>
+    <% @recipes.each do |recipe| %>
+      <div class="d-flex justify-content-center align-items-baseline gap-5 bg-light border w-75 m-auto p-3 my-3">
+        <div class="d-flex flex-column align-items-center flex-grow-1">
+          <h3 class="text-center"><%= link_to recipe.name, recipe_path(id: recipe.id), class: "text-dark" %></h3>
+          <p class="lead">By: <%= recipe.user.name %></p>
+        </div>
+        <div class="flex-grow-1" style="max-height: 200px; overflow: auto">
+          <% total_food_items(recipe.id) %>
+          <p class="lead">Total food items: <%= @sub_total[0] %></p>
+          <p class="lead">Total price: $<%= @sub_total[1] %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

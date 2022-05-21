@@ -1,0 +1,24 @@
+<div class="container d-flex flex-column align-items-center">
+  <h2>Add new inventory</h2>
+  <%= turbo_frame_tag @inventory do %>
+    <%= form_with model: @inventory do |form| %>
+      <% if @inventory.errors.any? %>
+        <div class="alert alert-danger mt-4" role="alert">
+          <% @inventory.errors.full_messages.each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="form-group mb-3">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control" , required: true %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= form.label :description %>
+        <%= form.text_area :description, class: "form-control", required: true %>
+      </div>
+      <%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+</div>

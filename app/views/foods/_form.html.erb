@@ -1,0 +1,28 @@
+<div class="container d-flex flex-column align-items-center">
+  <h2>Add new food</h2>
+  <%= form_with model: @food do |form| %>
+    <% if @food.errors.any? %>
+      <div class="alert alert-danger mt-4" role="alert">
+        <% @food.errors.full_messages.each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="form-group mb-3">
+      <%= form.label :name %> <br>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.label :measurement_unit %> <br>
+      <%= form.text_field :measurement_unit %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.label :price %> <br>
+      <%= form.number_field :price, step: 0.01 %>
+    </div>
+    <p><%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %></p>
+  <% end %>
+</div>

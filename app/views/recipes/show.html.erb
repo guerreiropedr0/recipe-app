@@ -1,0 +1,83 @@
+<div class="container mt-3 d-flex flex-column align-items-center">
+  <% if @recipe.public || @recipe.user == current_user %>
+  <h1><%= @recipe.name %></h1>
+  <div class="d-flex flex-column">
+    <div class="d-flex align-items-baseline gap-5">
+      <p class="fs-5">Preparation time: <%= @recipe.preparation_time %> minutes</p>
+      <div class="d-flex align-items-center gap-3">
+        <span class="fs-5">Public</span>
+        <% if @recipe.public %>
+          <i class="bi bi-toggle-on text-success fs-2"></i>
+        <% else %>
+          <i class="bi bi-toggle-off fs-2"></i>
+        <% end %>
+      </div>
+    </div>
+    <p class="fs-5">Cooking time: <%= @recipe.cooking_time %> minutes</p>
+    <p class="fs-5">Steps go here...</p>
+  </div>
+  <div class="d-flex justify-content-between w-50 flex-wrap">
+    <button type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop">
+        Generate shopping list
+    </button>
+    <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-primary m-1" if @recipe.user == current_user %>
+  </div>
+  <% else %>
+    <h1>You are not authorized to see this recipe.</h1>
+  <% end %>
+  <% if @recipe_foods.empty? %>
+    <h4 class="mt-5">No foods added yet.</h4>
+  <% else %>
+    <ul class="list-group border mx-0 mt-5 w-75">
+        <li class="row align-items-center p-2 bg-secondary text-white border-bottom mx-0">
+          <div class="col font-weight-bold text-capitalize"><b>Food</b></div>
+          <div class="col font-weight-bold text-capitalize"><b>Quantity</b></div>
+          <div class="col font-weight-bold text-capitalize"><b>Value</b></div>
+          <div class="col font-weight-bold text-capitalize"><b>Actions</b></div>
+        </li>
+        <% @recipe_foods.each do | recipe_food | %>
+          <li class="row align-items-center p-2 border-bottom border-left border-right mx-0">
+            <div class="col"><%= recipe_food.food.name %></div>
+            <div class="col"><%= recipe_food.quantity %></div>
+            <div class="col">$<%= total_price(recipe_food.id) %></div>
+            <div class="col">
+              <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), class: "btn btn-dark" %>
+              <%= link_to "Remove", recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
+</div>
+
+<div class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Generating Shopping List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6>Choose an inventory to use</h6>
+        <%= form_with url: shopping_lists_path, method: :get do |form| %>
+          <%= select("inventory", "inventory_id", Inventory.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Inventory' }) %>
+          <div class="field form-group mb-3">
+            <%= form.number_field :recipe_id, class: "form-control", value: @recipe.id, hidden: true %>
+          </div>
+      <div class="modal-footer">
+        <%= form.submit "Generate", data: { turbo: false }, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

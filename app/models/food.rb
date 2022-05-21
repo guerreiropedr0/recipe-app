@@ -25,5 +25,5 @@ class Food < ApplicationRecord
 
   validates :name, presence: true
   validates :measurement_unit, presence: true
-  validates :price, comparison: { greater_than_or_equal_to: 0.0 }, numericality: true
+  validates :price, comparison: { greater_than: 0.0 }, numericality: true
 end

@@ -1,20 +1,28 @@
 <div class="container mt-3 d-flex flex-column align-items-center">
-  <h1><%= @inventory.name %></h1>
-  <%= link_to "Add food", new_inventory_inventory_food_path(inventory_id: @inventory.id), class: "btn btn-primary m-1 align-self-end" %>
-  <ul class="list-group border mx-0 mt-5 w-75">
-    <li class="row align-items-center p-2 bg-secondary text-white border-bottom mx-0">
-      <div class="col font-weight-bold text-capitalize"><b>Food</b></div>
-      <div class="col font-weight-bold text-capitalize"><b>Quantity</b></div>
-      <div class="col font-weight-bold text-capitalize"><b>Actions</b></div>
-    </li>
-    <% @inventory_foods.each do | inventory_food | %>
-      <li class="row align-items-center p-2 border-bottom border-left border-right mx-0">
-        <div class="col"><%= inventory_food.food.name %></div>
-        <div class="col"><%= inventory_food.quantity %></div>
-        <div class="col">
-          <%= link_to "Remove", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-        </div>
+  <%if @inventory.user == current_user %>
+    <h1><%= @inventory.name %></h1>
+    <%= link_to "Add food", new_inventory_inventory_food_path(inventory_id: @inventory.id), class: "btn btn-primary m-1 align-self-end" %>
+    <ul class="list-group border mx-0 mt-5 w-75">
+      <li class="row align-items-center p-2 bg-secondary text-white border-bottom mx-0">
+        <div class="col font-weight-bold text-capitalize"><b>Food</b></div>
+        <div class="col font-weight-bold text-capitalize"><b>Quantity</b></div>
+        <div class="col font-weight-bold text-capitalize"><b>Actions</b></div>
       </li>
-    <% end %>
-  </ul>
+      <% if @inventory_foods.empty? %>
+        <h4 class="mt-5">No foods added yet.</h4>
+      <% else %>
+        <% @inventory_foods.each do | inventory_food | %>
+          <li class="row align-items-center p-2 border-bottom border-left border-right mx-0">
+            <div class="col"><%= inventory_food.food.name %></div>
+            <div class="col"><%= inventory_food.quantity %></div>
+            <div class="col">
+              <%= link_to "Remove", inventory_inventory_food_path(inventory_id: @inventory.id, id: inventory_food.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% else %>
+    <h4 class="mt-5">You are not authorized to see this inventory.</h4>
+  <% end %>
 </div>

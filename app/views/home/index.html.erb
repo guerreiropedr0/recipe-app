@@ -1,7 +1,39 @@
-<section class="container">
-  <h1>Landing Page - Home#index</h1>
-  <% if current_user.present? %>
-   <p>Login as: <%= current_user.email %></p>
+<h1>Public Recipes</h1>
+<section class="d-flex justify-content-between px-0 mx-0">
+  <div class="d-flex justify-content-start gap-2 w-100 flex-wrap">
+    <% @recipes.each do |recipe| %>
+      <div class="d-flex flex-column bg-warning border rounded w-45 p-3 my-3">
+        <div class="d-flex flex-column align-items-center flex-grow-1">
+          <h3 class="text-center"><%= link_to recipe.name, recipe_path(id: recipe.id), class: "text-dark" %></h3>
+          <p class="lead">By: <%= recipe.user.name %></p>
+        </div>
+        <div class="flex-grow-1" style="max-height: 200px; overflow: auto">
+          <% total_food_items(recipe.id) %>
+          <p class="lead">Total food items: <%= @sub_total[0] %></p>
+          <p class="lead">Total price: $<%= @sub_total[1] %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% unless user_signed_in? %>
+    <div class="container d-flex flex-column align-items-center">
+      <h2>Log in</h2>
+
+      <%= form_with url: user_session_path do |f| %>
+        <div class="field form-group py-2">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+
+        <div class="field form-group py-2">
+          <%= f.label :password %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Log in", data: { turbo: false }, class: "btn btn-primary my-2" %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
-  <p>Find me in app/views/home/index.html.erb</p>
 </section>

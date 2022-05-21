@@ -18,8 +18,11 @@
         </li>
       </ul>
       <% end %>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0m">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0m align-items-baseline">
       <% if user_signed_in? %>
+        <li class="nav-item px-4">
+          <p class="text-secondary">User: <%= current_user.name %></p>
+        </li>
         <li class="nav-item">
           <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-warning mb-1" %>
         </li>

@@ -24,7 +24,8 @@ require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
   let(:user) do
-    FactoryBot.create(:user, name: 'Pedro Guerreiro')
+    FactoryBot.create(:user, name: 'Pedro Guerreiro', email: 'pedro@domain.com', password: '123456',
+                             password_confirmation: '123456')
   end
 
   let(:recipe) do

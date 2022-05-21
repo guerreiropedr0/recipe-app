@@ -43,7 +43,7 @@ RSpec.describe 'Recipes', type: :system do
     end
 
     it 'should find all clickable links' do
-      find_link('Generate shopping list')
+      find_button('Generate shopping list')
       find_link('Add ingredient')
     end
 

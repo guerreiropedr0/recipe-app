@@ -21,11 +21,12 @@ require 'rails_helper'
 
 RSpec.describe Inventory, type: :model do
   let(:user) do
-    FactoryBot.create(:user, name: 'John')
+    FactoryBot.create(:user, name: 'Edward Yara', email: 'oluyaratosin123@gmail.com', password: 'root17',
+                             password_confirmation: 'root17')
   end
 
   let(:inventory) do
-    FactoryBot.create(:inventory, name: 'Edward', user_id: user.id)
+    FactoryBot.create(:inventory, name: 'Edward', user_id: user.id, description: 'Test')
   end
 
   before { inventory.save }

@@ -1,3 +1,34 @@
-<div class="container mt-3 d-flex flex-column align-items-center">
-  <h2>Shopping List</h2>
+<div class="container">
+  <h2 class="text-center mb-5">Shopping List</h2>
+  <div class="d-flex justify-content-between">
+    <div>
+      <h4>Amount of food to buy: <%= @shopping_list.length %></h4>
+      <h4>Total value of food needed: <%= @total_foods_value %>$</h4>
+    </div>
+    <div>
+      <h4>Recipe: <a href="#"> <%= @recipe.name %></a></h4>
+      <h4>Inventory: <a href="#"> <%= @inventory.name %>  </a></h4>
+    </div>
+  </div>
+
+  <%if @shopping_list.present? %>
+    <ul class="list-group border mx-0 mt-3">
+      <li class="row align-items-end p-2 bg-secondary text-white border-bottom mx-0">
+        <div class="col font-weight-bold text-capitalize"><b>Food</b></div>
+        <div class="col font-weight-bold text-capitalize"><b>Quantity</b></div>
+        <div class="col font-weight-bold text-capitalize"><b>Price</b></div>
+      </li>
+      <% @shopping_list.each do | item | %>
+        <li class="row align-items-end p-2 border-bottom border-left border-right mx-0">
+          <div class="col"><%= item[:food_name] %></div>
+          <div class="col"><%= item[:quantity]%>&nbsp;<%= item[:food_uom] %></div>
+          <div class="col">$<%= item[:price] %></div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="border-2">
+      <p class="bg-light text-center"> No need of shopping.
+    </div>
+  <% end %>
 </div>
